@@ -1,0 +1,144 @@
+.app {
+  min-height: 100vh;
+  padding: 0;
+}
+
+.app-header {
+  margin-bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 0 20px;
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+  border-bottom: 1px solid var(--pro-border, #e2e8f0);
+  color: var(--pro-text, #1e293b);
+  min-height: 52px;
+  height: auto;
+}
+
+.app-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  flex-shrink: 0;
+}
+
+.app-brand-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  background: linear-gradient(145deg, #22d3ee 0%, #06b6d4 55%, #0891b2 100%);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  box-shadow:
+    0 1px 2px rgba(8, 145, 178, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.28);
+  user-select: none;
+}
+
+.app-brand-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.app-brand-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  color: #0f172a;
+}
+
+.app-brand-tagline {
+  margin: 0;
+  color: var(--pro-text-dim, #64748b);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  line-height: 1.25;
+}
+
+.app-header h1 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.app-header p {
+  margin: 0;
+  color: var(--pro-text-dim, #64748b);
+  font-size: 12px;
+}
+
+.app-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  padding: 16px;
+}
+
+.app-grid-control {
+  grid-template-columns: minmax(260px, 0.68fr) minmax(500px, 1.32fr);
+}
+
+.app-grid-control > * {
+  min-width: 0;
+}
+
+.app-grid-frame {
+  grid-template-columns: 1fr 1fr;
+}
+
+.app-page-switch {
+  display: flex;
+  gap: 8px;
+  background: #f1f5f9;
+  padding: 4px;
+  border-radius: 10px;
+}
+
+.app-page-switch button {
+  background: transparent;
+  color: #64748b;
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-weight: 600;
+}
+
+.app-page-switch button:hover {
+  background: #ffffff;
+  color: #334155;
+}
+
+.app-page-switch button.active {
+  background: #ffffff;
+  color: #06b6d4;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.12);
+}
+
+@media (max-width: 1000px) {
+  .app-header {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 10px 16px;
+    gap: 10px;
+  }
+
+  .app-page-switch {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+  }
+
+  .app-grid {
+    grid-template-columns: 1fr;
+  }
+}

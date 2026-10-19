@@ -1,0 +1,41 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding: 0;
+  background: #ffffff;
+  overflow: hidden;
+}
+
+.app-header {
+  height: 50px;
+  padding: 0 20px;
+  background: #fff;
+  border-bottom: 1px solid var(--pro-border, #e2e8f0);
+  color: var(--pro-text, #1e293b);
+  margin-bottom: 0;
+  flex-shrink: 0;
+}
+
+.app > .app-grid,
+.app > section {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* 追踪预览：100% 高度工作站，禁止页面级滚动 */
+.app > section.tp-monitor {
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+}
+
+.app > section.xp-page {
+  overflow: auto;
+}
+
+/* 语音交互调试：内容高于视口时允许整页滚动 */
+.app > section.audio-input-debug {
+  overflow: auto;
+}

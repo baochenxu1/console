@@ -1,0 +1,18 @@
+# Cloudflare Pages — Face Console Web Staging (Phase 1)
+#
+# Prefer Git Integration in the Cloudflare dashboard (Preview Deployments on feature branches).
+# This file documents wrangler-compatible output for optional `wrangler pages deploy`.
+#
+# Dashboard settings (authoritative for Git builds):
+#   Root directory:     /   (this repository root = 04_Software)
+#   Build command:      npm run build:faceconsole-web
+#   Build output dir:   dist-web
+#   Node version:       20
+#   Environment vars:   (none required; model is downloaded during prepare step)
+#
+# Do NOT point Production branch at feature/browser-mediapipe-runtime.
+# Future Production should follow Git policy: release → (explicit promote) → main.
+
+name = "faceconsole-web-staging"
+compatibility_date = "2026-08-01"
+pages_build_output_dir = "dist-web"

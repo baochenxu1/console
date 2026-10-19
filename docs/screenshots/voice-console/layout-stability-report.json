@@ -1,0 +1,371 @@
+{
+  "baseUrl": "http://localhost:5173/?page=audioInput",
+  "screenshots": [
+    "idle-1920.png",
+    "running-1920.png",
+    "long-partial-1920.png",
+    "long-device-name-1920.png",
+    "error-1920.png",
+    "connecting-1920.png",
+    "running-1440.png"
+  ],
+  "boxes": {
+    "idle": {
+      "header": {
+        "x": 224,
+        "y": 64,
+        "width": 1472,
+        "height": 52
+      },
+      "toolbar": {
+        "x": 224,
+        "y": 128,
+        "width": 1472,
+        "height": 84
+      },
+      "workspace": {
+        "x": 224,
+        "y": 272,
+        "width": 1116,
+        "height": 672
+      },
+      "inspector": {
+        "x": 1356,
+        "y": 272,
+        "width": 340,
+        "height": 672
+      },
+      "advanced-runtime": {
+        "x": 224,
+        "y": 956,
+        "width": 1472,
+        "height": 44
+      },
+      "advanced-device": {
+        "x": 224,
+        "y": 1012,
+        "width": 1472,
+        "height": 44
+      },
+      "actionButton": {
+        "x": 1552,
+        "y": 164,
+        "width": 128,
+        "height": 36
+      },
+      "statusSlot": {
+        "x": 1432,
+        "y": 164,
+        "width": 104,
+        "height": 36
+      }
+    },
+    "assemblyai": {
+      "header": {
+        "x": 224,
+        "y": 64,
+        "width": 1472,
+        "height": 52
+      },
+      "toolbar": {
+        "x": 224,
+        "y": 128,
+        "width": 1472,
+        "height": 84
+      },
+      "workspace": {
+        "x": 224,
+        "y": 272,
+        "width": 1116,
+        "height": 672
+      },
+      "inspector": {
+        "x": 1356,
+        "y": 272,
+        "width": 340,
+        "height": 672
+      },
+      "advanced-runtime": {
+        "x": 224,
+        "y": 956,
+        "width": 1472,
+        "height": 44
+      },
+      "advanced-device": {
+        "x": 224,
+        "y": 1012,
+        "width": 1472,
+        "height": 44
+      },
+      "actionButton": {
+        "x": 1552,
+        "y": 164,
+        "width": 128,
+        "height": 36
+      },
+      "statusSlot": {
+        "x": 1432,
+        "y": 164,
+        "width": 104,
+        "height": 36
+      }
+    },
+    "deepgram": {
+      "header": {
+        "x": 224,
+        "y": 64,
+        "width": 1472,
+        "height": 52
+      },
+      "toolbar": {
+        "x": 224,
+        "y": 128,
+        "width": 1472,
+        "height": 84
+      },
+      "workspace": {
+        "x": 224,
+        "y": 272,
+        "width": 1116,
+        "height": 672
+      },
+      "inspector": {
+        "x": 1356,
+        "y": 272,
+        "width": 340,
+        "height": 672
+      },
+      "advanced-runtime": {
+        "x": 224,
+        "y": 956,
+        "width": 1472,
+        "height": 44
+      },
+      "advanced-device": {
+        "x": 224,
+        "y": 1012,
+        "width": 1472,
+        "height": 44
+      },
+      "actionButton": {
+        "x": 1552,
+        "y": 164,
+        "width": 128,
+        "height": 36
+      },
+      "statusSlot": {
+        "x": 1432,
+        "y": 164,
+        "width": 104,
+        "height": 36
+      }
+    },
+    "running": {
+      "header": {
+        "x": 224,
+        "y": 64,
+        "width": 1472,
+        "height": 52
+      },
+      "toolbar": {
+        "x": 224,
+        "y": 128,
+        "width": 1472,
+        "height": 84
+      },
+      "workspace": {
+        "x": 224,
+        "y": 272,
+        "width": 1116,
+        "height": 672
+      },
+      "inspector": {
+        "x": 1356,
+        "y": 272,
+        "width": 340,
+        "height": 672
+      },
+      "advanced-runtime": {
+        "x": 224,
+        "y": 956,
+        "width": 1472,
+        "height": 44
+      },
+      "advanced-device": {
+        "x": 224,
+        "y": 1012,
+        "width": 1472,
+        "height": 44
+      },
+      "actionButton": {
+        "x": 1552,
+        "y": 164,
+        "width": 128,
+        "height": 36
+      },
+      "statusSlot": {
+        "x": 1432,
+        "y": 164,
+        "width": 104,
+        "height": 36
+      }
+    },
+    "longPartial": {
+      "header": {
+        "x": 224,
+        "y": 64,
+        "width": 1472,
+        "height": 52
+      },
+      "toolbar": {
+        "x": 224,
+        "y": 128,
+        "width": 1472,
+        "height": 84
+      },
+      "workspace": {
+        "x": 224,
+        "y": 272,
+        "width": 1116,
+        "height": 672
+      },
+      "inspector": {
+        "x": 1356,
+        "y": 272,
+        "width": 340,
+        "height": 672
+      },
+      "advanced-runtime": {
+        "x": 224,
+        "y": 956,
+        "width": 1472,
+        "height": 44
+      },
+      "advanced-device": {
+        "x": 224,
+        "y": 1012,
+        "width": 1472,
+        "height": 44
+      },
+      "actionButton": {
+        "x": 1552,
+        "y": 164,
+        "width": 128,
+        "height": 36
+      },
+      "statusSlot": {
+        "x": 1432,
+        "y": 164,
+        "width": 104,
+        "height": 36
+      }
+    },
+    "longError": {
+      "header": {
+        "x": 224,
+        "y": 64,
+        "width": 1472,
+        "height": 52
+      },
+      "toolbar": {
+        "x": 224,
+        "y": 128,
+        "width": 1472,
+        "height": 84
+      },
+      "workspace": {
+        "x": 224,
+        "y": 272,
+        "width": 1116,
+        "height": 672
+      },
+      "inspector": {
+        "x": 1356,
+        "y": 272,
+        "width": 340,
+        "height": 672
+      },
+      "advanced-runtime": {
+        "x": 224,
+        "y": 956,
+        "width": 1472,
+        "height": 44
+      },
+      "advanced-device": {
+        "x": 224,
+        "y": 1012,
+        "width": 1472,
+        "height": 44
+      },
+      "actionButton": {
+        "x": 1552,
+        "y": 164,
+        "width": 128,
+        "height": 36
+      },
+      "statusSlot": {
+        "x": 1432,
+        "y": 164,
+        "width": 104,
+        "height": 36
+      }
+    },
+    "afterStop": {
+      "header": {
+        "x": 224,
+        "y": 64,
+        "width": 1472,
+        "height": 52
+      },
+      "toolbar": {
+        "x": 224,
+        "y": 128,
+        "width": 1472,
+        "height": 84
+      },
+      "workspace": {
+        "x": 224,
+        "y": 272,
+        "width": 1116,
+        "height": 672
+      },
+      "inspector": {
+        "x": 1356,
+        "y": 272,
+        "width": 340,
+        "height": 672
+      },
+      "advanced-runtime": {
+        "x": 224,
+        "y": 956,
+        "width": 1472,
+        "height": 44
+      },
+      "advanced-device": {
+        "x": 224,
+        "y": 1012,
+        "width": 1472,
+        "height": 44
+      },
+      "actionButton": {
+        "x": 1552,
+        "y": 164,
+        "width": 128,
+        "height": 36
+      },
+      "statusSlot": {
+        "x": 1432,
+        "y": 164,
+        "width": 104,
+        "height": 36
+      }
+    }
+  },
+  "tooltips": {
+    "hoverOpens": true,
+    "focusOpens": true
+  },
+  "issues": [],
+  "consoleErrors": [],
+  "pass": true
+}

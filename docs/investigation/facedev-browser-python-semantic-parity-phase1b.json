@@ -1,0 +1,277 @@
+{
+  "schema": "facedev.semantic-parity-report.v1",
+  "baseline": "formal Python mediapipe_result_to_rig (scripts/export-python-tracking-baseline.py)",
+  "sampleCount": 14,
+  "tolerance": {
+    "MATCH": 1,
+    "CLOSE": 8
+  },
+  "perChannel": {
+    "browL.tip": {
+      "maxAbsError": 2,
+      "meanAbsError": 0.14285714285714285,
+      "p95AbsError": 0
+    },
+    "browL.mid": {
+      "maxAbsError": 2,
+      "meanAbsError": 0.14285714285714285,
+      "p95AbsError": 0
+    },
+    "browL.tail": {
+      "maxAbsError": 2,
+      "meanAbsError": 0.14285714285714285,
+      "p95AbsError": 0
+    },
+    "browR.tip": {
+      "maxAbsError": 2,
+      "meanAbsError": 0.14285714285714285,
+      "p95AbsError": 0
+    },
+    "browR.mid": {
+      "maxAbsError": 2,
+      "meanAbsError": 0.14285714285714285,
+      "p95AbsError": 0
+    },
+    "browR.tail": {
+      "maxAbsError": 2,
+      "meanAbsError": 0.14285714285714285,
+      "p95AbsError": 0
+    },
+    "eyeL.up": {
+      "maxAbsError": 1,
+      "meanAbsError": 0.07142857142857142,
+      "p95AbsError": 0
+    },
+    "eyeL.lo": {
+      "maxAbsError": 0,
+      "meanAbsError": 0,
+      "p95AbsError": 0
+    },
+    "eyeR.up": {
+      "maxAbsError": 1,
+      "meanAbsError": 0.07142857142857142,
+      "p95AbsError": 0
+    },
+    "eyeR.lo": {
+      "maxAbsError": 0.5,
+      "meanAbsError": 0.03571428571428571,
+      "p95AbsError": 0
+    },
+    "sharedRadar.x": {
+      "maxAbsError": 1.8791999999999973,
+      "meanAbsError": 0.13422857142857123,
+      "p95AbsError": 0
+    },
+    "sharedRadar.y": {
+      "maxAbsError": 0,
+      "meanAbsError": 0,
+      "p95AbsError": 0
+    },
+    "mouth.UL": {
+      "maxAbsError": 1.2947334400000006,
+      "meanAbsError": 0.2616217019187203,
+      "p95AbsError": 0.8804187392000005
+    },
+    "mouth.UR": {
+      "maxAbsError": 1.2947334400000006,
+      "meanAbsError": 0.2616217019187203,
+      "p95AbsError": 0.8804187392000005
+    },
+    "mouth.LL": {
+      "maxAbsError": 1.2947334400000006,
+      "meanAbsError": 0.2616217019187203,
+      "p95AbsError": 0.8804187392000005
+    },
+    "mouth.LR": {
+      "maxAbsError": 1.2947334400000006,
+      "meanAbsError": 0.2616217019187203,
+      "p95AbsError": 0.8804187392000005
+    },
+    "mouth.sideL.x": {
+      "maxAbsError": 0,
+      "meanAbsError": 0,
+      "p95AbsError": 0
+    },
+    "mouth.sideL.y": {
+      "maxAbsError": 0,
+      "meanAbsError": 0,
+      "p95AbsError": 0
+    },
+    "mouth.sideR.x": {
+      "maxAbsError": 0,
+      "meanAbsError": 0,
+      "p95AbsError": 0
+    },
+    "mouth.sideR.y": {
+      "maxAbsError": 0,
+      "meanAbsError": 0,
+      "p95AbsError": 0
+    },
+    "jaw.val": {
+      "maxAbsError": 4,
+      "meanAbsError": 0.7404571428571428,
+      "p95AbsError": 3.6864
+    }
+  },
+  "headPose": {
+    "yawProxy": {
+      "maxAbsError": 0,
+      "meanAbsError": 0,
+      "p95AbsError": 0
+    },
+    "pitchProxy": {
+      "maxAbsError": 0,
+      "meanAbsError": 0,
+      "p95AbsError": 0
+    },
+    "rollDeg": {
+      "maxAbsError": 0,
+      "meanAbsError": 0,
+      "p95AbsError": 0
+    },
+    "faceScale": {
+      "maxAbsError": 0,
+      "meanAbsError": 0,
+      "p95AbsError": 0
+    }
+  },
+  "quality": {
+    "maxAbsError": 0,
+    "meanAbsError": 0,
+    "p95AbsError": 0
+  },
+  "gateFrames": [
+    {
+      "name": "neutral-calibrate",
+      "python": "neutral_still",
+      "sharedJs": "neutral_still",
+      "match": true
+    },
+    {
+      "name": "neutral",
+      "python": "neutral_still",
+      "sharedJs": "neutral_still",
+      "match": true
+    },
+    {
+      "name": "blink",
+      "python": "neutral_still",
+      "sharedJs": "neutral_still",
+      "match": true
+    },
+    {
+      "name": "brow",
+      "python": "neutral_still",
+      "sharedJs": "neutral_still",
+      "match": true
+    },
+    {
+      "name": "mouth-open",
+      "python": "frontal_mouth_motion",
+      "sharedJs": "frontal_mouth_motion",
+      "match": true
+    },
+    {
+      "name": "smile",
+      "python": "frontal_mouth_motion",
+      "sharedJs": "frontal_mouth_motion",
+      "match": true
+    },
+    {
+      "name": "pucker",
+      "python": "frontal_mouth_motion",
+      "sharedJs": "frontal_mouth_motion",
+      "match": true
+    },
+    {
+      "name": "gaze-right",
+      "python": "frontal_mouth_motion",
+      "sharedJs": "frontal_mouth_motion",
+      "match": true
+    },
+    {
+      "name": "gaze-left",
+      "python": "frontal_mouth_motion",
+      "sharedJs": "frontal_mouth_motion",
+      "match": true
+    },
+    {
+      "name": "gaze-up",
+      "python": "frontal_mouth_motion",
+      "sharedJs": "frontal_mouth_motion",
+      "match": true
+    },
+    {
+      "name": "gaze-down",
+      "python": "frontal_mouth_motion",
+      "sharedJs": "frontal_mouth_motion",
+      "match": true
+    },
+    {
+      "name": "head-yaw",
+      "python": "frontal_mouth_motion",
+      "sharedJs": "frontal_mouth_motion",
+      "match": true
+    },
+    {
+      "name": "head-pitch",
+      "python": "frontal_mouth_motion",
+      "sharedJs": "frontal_mouth_motion",
+      "match": true
+    },
+    {
+      "name": "head-roll",
+      "python": "frontal_mouth_motion",
+      "sharedJs": "frontal_mouth_motion",
+      "match": true
+    }
+  ],
+  "gateFrameMatchRate": 1,
+  "summary": {
+    "Brow": {
+      "maxAbsError": 2,
+      "status": "CLOSE"
+    },
+    "EyesBlink": {
+      "maxAbsError": 1,
+      "status": "MATCH"
+    },
+    "Gaze": {
+      "maxAbsError": 1.8791999999999973,
+      "status": "CLOSE"
+    },
+    "Mouth": {
+      "maxAbsError": 1.2947334400000006,
+      "status": "CLOSE"
+    },
+    "MouthCorner": {
+      "maxAbsError": 0,
+      "status": "MATCH"
+    },
+    "Jaw": {
+      "maxAbsError": 4,
+      "status": "CLOSE"
+    },
+    "HeadPose": {
+      "maxAbsError": 0,
+      "status": "MATCH",
+      "note": "Formal path remains landmark mouth-frame yaw/pitch/roll proxies; facialTransformationMatrix is observation-only and does not drive Elite Rig (no headPose field)."
+    },
+    "Quality": {
+      "maxAbsError": 0,
+      "status": "MATCH",
+      "note": "JS estimateObservationQuality mirrors blendshape-count heuristic when MediaPipe confidences absent; Python estimate_tracking_quality uses the same family of signals."
+    },
+    "Blink": {
+      "maxAbsError": 1,
+      "status": "MATCH"
+    }
+  },
+  "architecture": {
+    "formalPath": "Provider → Canonical MediaPipe Observation → Shared Tracking Semantic Core → tracking.rigFrame",
+    "browserProviderOwnsRigMath": false,
+    "pythonProviderShortTerm": "still emits full rigFrame over WebSocket; observation contract is next step",
+    "headPoseMath": "landmark-mouth-frame (not matrix)",
+    "semanticComputeLocation": "main-thread Shared Core after Worker inference"
+  }
+}

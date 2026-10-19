@@ -1,0 +1,546 @@
+.servo-control-page {
+  width: min(100%, 1480px);
+  margin: 0 auto;
+  display: grid;
+  /* 左右两栏等宽、等高，尽量贴近视口下沿 */
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  --servo-col-h: calc(100vh - 96px);
+  gap: 20px;
+  padding: 16px 20px 20px;
+  align-items: stretch;
+  box-sizing: border-box;
+}
+
+.servo-control-page > * {
+  min-width: 0;
+}
+
+.servo-control-serial {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: var(--servo-col-h);
+}
+
+.servo-control-serial-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 0;
+}
+
+.servo-control-serial-head h2 {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.servo-control-serial-hint {
+  margin: 0;
+  font-size: 12px;
+  color: #64748b;
+  line-height: 1.45;
+  text-align: center;
+}
+
+.servo-control-serial-warn {
+  margin: 0;
+  font-size: 12px;
+  color: #b45309;
+  line-height: 1.45;
+  text-align: center;
+}
+
+.servo-control-status {
+  border-radius: 999px;
+  padding: 3px 10px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.servo-control-status--on {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.servo-control-status--off {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.servo-control-serial-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.servo-control-serial-connect {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.servo-control-serial-baud {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.servo-control-serial-baud label {
+  flex-shrink: 0;
+  font-size: 12px;
+  color: #64748b;
+}
+
+.servo-control-serial-actions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.servo-control-serial-actions .servo-control-btn {
+  width: 100%;
+  justify-content: center;
+  padding: 8px 10px;
+}
+
+.servo-control-serial-toolbar {
+  flex-wrap: nowrap;
+}
+
+.servo-control-serial-row label {
+  flex-shrink: 0;
+  font-size: 12px;
+  color: #64748b;
+}
+
+.servo-control-baud-select {
+  flex: 1 1 auto;
+  width: auto;
+  min-width: 112px;
+  max-width: 160px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+
+.servo-control-serial-toolbar .servo-control-btn {
+  flex-shrink: 0;
+  white-space: nowrap;
+  padding: 6px 10px;
+}
+
+.servo-control-serial-actions .servo-control-btn {
+  white-space: nowrap;
+}
+
+.servo-control-btn {
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 13px;
+  cursor: pointer;
+  background: #2563eb;
+  color: #fff;
+}
+
+.servo-control-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.servo-control-btn--ghost {
+  background: #e2e8f0;
+  color: #334155;
+}
+
+.servo-control-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 12px;
+  color: #64748b;
+  justify-content: center;
+  text-align: center;
+}
+
+.servo-control-meta strong {
+  color: #334155;
+}
+
+.servo-control-log {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  margin-top: 4px;
+}
+
+.servo-control-log-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.servo-control-log-header h3 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.servo-control-log-list {
+  flex: 1;
+  min-height: 280px;
+  overflow: auto;
+  font-family: ui-monospace, monospace;
+  font-size: 11px;
+  line-height: 1.45;
+  background: #0f172a;
+  color: #94a3b8;
+  border-radius: 8px;
+  padding: 8px;
+}
+
+.servo-control-log-line {
+  margin-bottom: 4px;
+  word-break: break-all;
+}
+
+.servo-control-log-time {
+  color: #64748b;
+  margin-right: 4px;
+}
+
+.servo-control-log-type {
+  margin-right: 4px;
+}
+
+.servo-control-log-line--error {
+  color: #f87171;
+}
+
+.servo-control-log-line--tx {
+  color: #60a5fa;
+}
+
+.servo-control-log-line--rx,
+.servo-control-log-line--info {
+  color: #34d399;
+}
+
+.servo-control-log-line--warn {
+  color: #fbbf24;
+}
+
+.servo-control-log-empty {
+  color: #64748b;
+}
+
+.servo-control-panel-wrap {
+  min-width: 0;
+  min-height: var(--servo-col-h);
+  display: flex;
+  flex-direction: column;
+  container-type: inline-size;
+  container-name: servo-panel;
+}
+
+.servo-control-panel-wrap .servo-panel-v2 {
+  max-width: 100%;
+  margin: 0;
+  flex: 1;
+  min-height: 0;
+  max-height: var(--servo-col-h);
+  padding: 14px 16px;
+  gap: 10px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.servo-control-panel-wrap .panel-header {
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 0 2px 12px;
+  flex-shrink: 0;
+}
+
+.servo-control-panel-wrap .header-left {
+  flex: 0 0 auto;
+  flex-wrap: nowrap;
+  min-width: 0;
+}
+
+.servo-control-panel-wrap .mode-switcher button {
+  padding: 8px 14px;
+  font-size: 13px;
+}
+
+.servo-control-panel-wrap .servo-panel-v2 > .panel-content.card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+  padding: 16px 18px 18px;
+}
+
+/* Tab 内容区锁定视口高度，内部滚动 */
+.servo-control-panel-wrap .view-control,
+.servo-control-panel-wrap .view-config {
+  flex: 1;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.servo-control-panel-wrap .compact-log {
+  padding: 12px 14px;
+  min-width: 0;
+  flex-shrink: 0;
+}
+
+.servo-control-panel-wrap .config-horizontal-block {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 20px;
+}
+
+.servo-control-panel-wrap .view-config .field select,
+.servo-control-panel-wrap .view-config .field-group select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 8px 10px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #475569;
+  background: #fff;
+}
+
+.servo-control-panel-wrap .config-export-row {
+  flex-wrap: wrap;
+}
+
+.servo-control-panel-wrap .config-export-row .btn-outline,
+.servo-control-panel-wrap .config-export-row .btn-text-danger {
+  flex: 1 1 calc(50% - 4px);
+  min-width: 88px;
+}
+
+.servo-control-panel-wrap .protocol-inline-select select {
+  min-width: 0;
+  width: 100%;
+  max-width: none;
+}
+
+.servo-control-panel-wrap .sub-readout-group {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: repeat(2, auto);
+  justify-content: stretch;
+  align-items: stretch;
+}
+
+.servo-control-panel-wrap .readout-badge {
+  align-items: center;
+  text-align: center;
+  width: 100%;
+}
+
+.servo-control-panel-wrap .main-readout--primary {
+  align-items: center;
+  text-align: center;
+}
+
+.servo-control-panel-wrap .protocol-inline-select {
+  align-items: center;
+}
+
+.servo-control-panel-wrap .protocol-inline-select label {
+  text-align: center;
+}
+
+.servo-control-panel-wrap .view-header {
+  justify-content: center;
+}
+
+.servo-control-panel-wrap .view-header h3 {
+  text-align: center;
+  width: 100%;
+}
+
+.servo-control-panel-wrap .config-horizontal-block {
+  align-items: start;
+}
+
+.servo-control-panel-wrap .config-col {
+  min-height: 0;
+  overflow: visible;
+}
+
+.servo-control-panel-wrap .bus-servo-control {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-height: 0;
+}
+
+.servo-control-panel-wrap .compact-log {
+  flex-shrink: 0;
+  margin-top: auto;
+}
+
+.servo-control-panel-wrap .field-input-wrapper,
+.servo-control-panel-wrap .calibration-workbench {
+  padding: 14px 16px;
+}
+
+.servo-control-panel-wrap .bus-id-scan-row,
+.servo-control-panel-wrap .bus-id-change-row {
+  align-items: center;
+}
+
+.servo-control-panel-wrap .servo-id-field {
+  flex: 0 0 auto;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  white-space: nowrap;
+}
+
+.servo-control-panel-wrap .servo-id-input {
+  /* 固定占位：ID 前缀 + 两位数 + 上下三角，避免 0→1 / 9→10 挤动下方排版 */
+  display: grid;
+  grid-template-columns: 2rem minmax(0, 1fr);
+  align-items: stretch;
+  width: 7.5rem;
+  min-width: 7.5rem;
+  max-width: 7.5rem;
+  height: 2rem;
+  box-sizing: border-box;
+  border: 1px solid var(--border, #c9cdd4);
+  border-radius: 6px;
+  background: var(--surface, #fff);
+  overflow: hidden;
+  flex: 0 0 7.5rem;
+}
+
+.servo-control-panel-wrap .servo-id-prefix {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--muted, #5b6472);
+  user-select: none;
+  border-right: 1px solid var(--border, #e2e5ea);
+  line-height: 1;
+}
+
+.servo-control-panel-wrap .servo-id-input input[type="number"] {
+  width: 100%;
+  min-width: 0;
+  height: 100%;
+  border: 0;
+  outline: none;
+  margin: 0;
+  padding: 0 0.2rem 0 0.35rem;
+  box-sizing: border-box;
+  font-variant-numeric: tabular-nums;
+  background: transparent;
+  line-height: 2rem;
+}
+
+.servo-control-panel-wrap .servo-id-input input[type="number"]::-webkit-outer-spin-button,
+.servo-control-panel-wrap .servo-id-input input[type="number"]::-webkit-inner-spin-button {
+  margin: 0;
+  opacity: 1;
+  height: 1.35rem;
+}
+
+.servo-control-panel-wrap .field-inline {
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+@container servo-panel (max-width: 700px) {
+  .servo-control-panel-wrap .config-horizontal-block {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .servo-control-panel-wrap .field-group {
+    grid-template-columns: 1fr;
+  }
+
+  .servo-control-panel-wrap .panel-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .servo-control-panel-wrap .header-left,
+  .servo-control-panel-wrap .mode-switcher {
+    width: 100%;
+  }
+
+  .servo-control-panel-wrap .mode-switcher {
+    display: flex;
+  }
+
+  .servo-control-panel-wrap .mode-switcher button {
+    flex: 1;
+  }
+
+  .servo-control-panel-wrap .monitor-row-top {
+    grid-template-columns: 1fr;
+  }
+
+  .servo-control-panel-wrap .protocol-inline-select {
+    width: 100%;
+  }
+
+  .servo-control-panel-wrap .protocol-inline-select select {
+    max-width: none;
+  }
+}
+
+@media (max-width: 1000px) {
+  .servo-control-page {
+    grid-template-columns: 1fr;
+    --servo-col-h: min(72vh, 720px);
+  }
+
+  .servo-control-serial {
+    min-height: auto;
+  }
+
+  .servo-control-panel-wrap {
+    min-height: auto;
+  }
+
+  .servo-control-panel-wrap .view-control,
+  .servo-control-panel-wrap .view-config {
+    min-height: 0;
+  }
+
+  .servo-control-log-list {
+    max-height: 240px;
+    flex: none;
+  }
+
+  .servo-control-serial-toolbar {
+    flex-wrap: wrap;
+  }
+
+  .servo-control-serial-actions {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rjsbus"
+version = "0.1.2"
+description = "Ruijie RJ_SBUS bus servo Python API (pyserial). logical 0/500/1000 → ticks -900/0/+900."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "Face Console" }]
+keywords = ["servo", "rj", "sbus", "ruijie", "serial"]
+dependencies = ["pyserial>=3.5"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Topic :: System :: Hardware",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0", "build>=1.0"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+rjsbus = ["py.typed"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+  "hardware: live serial tests (requires RJ servo)",
+]

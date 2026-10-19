@@ -1,0 +1,696 @@
+---
+description: Universal Git branch governance and merge policy. Always apply before creating branches, committing, merging, preparing releases, or giving Git-related instructions.
+globs:
+alwaysApply: true
+---
+
+# Universal Git Branch Policy
+
+## 1. Branch Model
+
+All projects should use the following default branch categories:
+
+1. `main`
+2. `develop`
+3. `release`
+4. `feature/*`
+
+Do not introduce additional long-lived branch categories unless explicitly approved.
+
+`main`, `develop`, and `release` are fixed long-lived branch names.
+
+Allowed short-lived branch category:
+
+```text
+feature/<scope>
+```
+
+Optional emergency branch category:
+
+```text
+hotfix/<issue>
+```
+
+`hotfix/*` is only allowed for urgent baseline repair and must not become part of the normal workflow.
+
+## 2. Branch Roles
+
+### 2.1 main
+
+`main` is the protected baseline branch.
+
+Rules:
+
+- `main` represents the latest accepted stable baseline.
+- `main` accepts merge requests only from `release`.
+- Direct push to `main` is forbidden.
+- Feature work must never be committed directly to `main`.
+- Experimental work must never be committed directly to `main`.
+- Development work must not be performed directly on `main`.
+- Every merge into `main` must represent an accepted release or baseline.
+- **Hard gate:** Do **not** merge `release` into `main`, push `main`, or otherwise promote any release version to `main` unless the user has given an **explicit promotion instruction** for that release (for example: push to main, promote this release to main, merge release into main). Finishing work on `release`, creating a tag, or assuming validation passed is **not** enough.
+
+Allowed merge direction:
+
+```text
+release → main
+```
+
+Forbidden merge directions:
+
+```text
+feature/* → main
+develop → main
+local changes → main
+```
+
+### 2.2 release
+
+`release` is a fixed long-lived release validation branch.
+
+The release branch must always be named exactly `release`.
+
+Do **not** create versioned release branches such as:
+
+```text
+release/v1.0.0
+release/v0.5.0
+release/FaceConsole-v0.5.0
+release/<version>
+release/<version-or-phase>
+```
+
+Purpose:
+
+- Release candidate validation.
+- Pre-release testing.
+- Regression testing.
+- Release-blocking bug fixes.
+- Documentation correction.
+- Version preparation.
+- Final acceptance before promotion to `main`.
+
+Rules:
+
+- When `develop` reaches a stable release-candidate state, merge `develop` into `release`.
+- Use `release` for release validation, regression testing, release-blocking fixes, documentation correction, and version preparation.
+- `release` must not be used for new feature development.
+- Only stabilization changes are allowed on `release`.
+- New experimental work must not enter `release`.
+- When a version is published, create a Git tag on the published commit.
+- Version positioning must rely on tags, not release branch names.
+- After release acceptance, merge `release` into `main`.
+- If release fixes are made on `release`, back-merge them into `develop`.
+
+Allowed integration:
+
+```text
+develop → release
+```
+
+Allowed merge directions:
+
+```text
+release → main
+release → develop
+```
+
+`release → develop` is used only for back-merging release fixes.
+
+Forbidden by default:
+
+```text
+feature/* → release
+main → release
+```
+
+Exception:
+
+```text
+feature/* → release
+```
+
+is allowed only when explicitly approved as a release-blocking fix.
+
+### 2.3 develop
+
+`develop` is the primary integration branch.
+
+Purpose:
+
+- Main development integration.
+- Feature acceptance staging.
+- Phase-level integration.
+- Preparing the release candidate sent to `release`.
+
+Rules:
+
+- Completed and accepted `feature/*` branches merge into `develop`.
+- `develop` should remain buildable and runnable.
+- Work merged into `develop` should have passed local validation.
+- Unstable experiments must not be merged into `develop`.
+- When a stage is complete and stable, merge `develop` into `release`.
+- `develop` must not be promoted directly to `main`.
+
+Allowed merge directions:
+
+```text
+feature/* → develop
+develop → release
+release → develop
+```
+
+Forbidden:
+
+```text
+develop → main
+main → develop   (for routine development)
+```
+
+### 2.4 feature/*
+
+`feature/*` is the forward-looking development branch category.
+
+Purpose:
+
+- New feature development.
+- Large-version development.
+- Architecture experiments.
+- Prototype validation.
+- Risky refactoring.
+- Technical exploration.
+
+Rules:
+
+- All non-trivial new work should start from `develop` into `feature/*`.
+- A feature branch should focus on one coherent feature, module, experiment, or phase.
+- Incomplete or unstable feature work must not be merged into `develop`.
+- Completed and accepted feature work merges into `develop`.
+- Failed experiments should be abandoned without merging.
+- Feature branches must not merge directly into `main`.
+- Feature branches must not merge directly into `release` unless explicitly approved for a release-blocking fix.
+
+Allowed creation:
+
+```text
+develop → feature/<scope>
+```
+
+Allowed merge direction:
+
+```text
+feature/* → develop
+```
+
+Forbidden:
+
+```text
+feature/* → main
+feature/* → release   (by default)
+```
+
+## 3. Standard Workflow
+
+### 3.1 Normal Feature and Release Workflow
+
+Use this default flow:
+
+```text
+feature/* → develop → release → main
+```
+
+Or explicitly:
+
+```text
+feature/* → develop
+develop 定版 → release
+release 验证 / 修复 / 发布准备
+release 发布时打 tag
+release → main
+```
+
+Required process:
+
+1. Start from `develop`.
+2. Create `feature/<scope>`.
+3. Complete development and local validation.
+4. Merge `feature/<scope>` into `develop`.
+5. When `develop` reaches a stable release-candidate state, merge `develop` into `release`.
+6. Validate and stabilize on `release`.
+7. When publishing, create a Git tag on the published commit.
+8. After release acceptance, merge `release` into `main`.
+9. Back-merge release fixes into `develop` if needed.
+
+### 3.2 Release Preparation Workflow
+
+Use this flow:
+
+```text
+develop → release
+```
+
+Before merging into `release`, verify:
+
+- Current development stage is complete.
+- Known blockers are resolved or documented.
+- Local validation has passed.
+- Required documentation is updated.
+- No unstable experimental work is included.
+
+Allowed changes on `release`:
+
+1. Bug fixes
+2. Regression fixes
+3. Documentation corrections
+4. Configuration corrections
+5. Release-blocking stabilization changes
+6. Version or release metadata updates
+
+Forbidden changes on `release`:
+
+1. New experimental features
+2. Large refactors
+3. Unvalidated architecture changes
+4. Unplanned feature expansion
+5. Risky behavior changes unrelated to release stabilization
+
+### 3.3 Version Tags
+
+Version positioning must rely on tags, not release branch names.
+
+The release branch is always named `release`. Do not encode versions in branch names.
+
+Tag naming may be project-specific. Examples:
+
+```text
+v0.5.0
+v0.5.1
+FaceConsole-v0.5.0
+```
+
+Rules:
+
+- Create an **annotated** tag on the published commit on `release` when the version is published.
+- Lightweight tags are forbidden for public release versions.
+- Later versions are additional tags on later published commits; the branch remains `release`.
+
+#### Tag message requirements (mandatory)
+
+The annotated tag message is public release notes for collaborators and external readers. It must explain **why this version is published**, not only the version number.
+
+Required content in the tag message:
+
+1. **Version identity** — tag name / product name in the first line.
+2. **Why release** — one short paragraph: the goal or baseline this version establishes.
+3. **What’s new / upgraded** — bullet list of main features or capability upgrades.
+4. **Fixes / improvements** — bullet list of notable bug fixes and stability changes (write “无” only when truly none).
+
+Forbidden in tag messages:
+
+- Internal process notes only (e.g. “merge release to main”, hook/agent metadata).
+- Empty bodies (`v0.5.0` with no explanation).
+- Cursor-related attribution or tooling trailers.
+
+Example structure:
+
+```text
+Face Console v0.5.0
+
+发布原因：……
+
+主要功能升级：
+- …
+- …
+
+修复与改进：
+- …
+
+```
+
+### 3.4 Main Promotion Workflow
+
+Use this flow **only after an explicit user promotion instruction**:
+
+```text
+release → main
+```
+
+Required user gate (mandatory):
+
+- The user must explicitly instruct promotion for **this** release (merge/push to `main`).
+- Do **not** promote because a release tag exists, because `release` is green, or because a prior message said “assume it passed”.
+- Do **not** batch-promote multiple release versions to `main` without a matching explicit instruction.
+
+Before merging into `main`, verify:
+
+- Explicit user promotion instruction is present in the current task.
+- Release validation passed (per user or confirmed acceptance).
+- No unfinished feature work remains on `release`.
+- Documentation or release notes are ready if needed.
+- The merge direction is strictly `release → main`.
+- The published commit is tagged if a version was published.
+- The baseline is acceptable.
+
+#### Main promotion commit message requirements (mandatory)
+
+`main` is the primary public branch. External readers use `main` history to understand **current product capabilities** and **what this release upgraded**.
+
+The `release → main` merge (or promotion) commit message must be **user-facing release notes**, not an internal process memo.
+
+Required content:
+
+1. **Title** — product + version (or baseline name), plus one-line summary of the release theme.
+2. **Project overview** (when this promotion introduces or significantly reshapes the product baseline) — what Face Console / the console is for.
+3. **Major upgrades** — capabilities and feature themes users care about.
+4. **Fixes / improvements** — significant defects or workflow fixes included in this baseline.
+
+Forbidden in `main` promotion commit messages:
+
+- Process-only text such as “由所有者明确指令完成 release → main”, “后续禁止晋升” as the whole message body.
+- Agent/hook/Cursor attribution.
+- Vague titles like `merge release` with no product substance.
+
+Good example shape:
+
+```text
+Face Console v0.5.0：完整面部舵机控制台与摄像头追踪基线
+
+项目能力：……
+
+本版主要升级：
+- …
+- …
+
+修复与改进：
+- …
+```
+
+After merging into `main`:
+
+- Back-merge release fixes into `develop` if needed.
+- Do not continue development directly on `main`.
+- Do not create a new `release/<version>` branch.
+- Treat subsequent release promotions as **blocked** until the user again gives an explicit instruction.
+
+## 4. Merge Matrix
+
+| From | To | Allowed | Notes |
+|------|-----|---------|-------|
+| `feature/*` | `develop` | Yes | After feature validation |
+| `develop` | `release` | Yes | When preparing / promoting a release candidate |
+| `release` | `main` | Yes, only with explicit user instruction | After release acceptance **and** user’s explicit promotion command |
+| `release` | `develop` | Yes | Back-merge release fixes |
+| `feature/*` | `main` | No | Never |
+| `develop` | `main` | No | Must go through `release` |
+| `feature/*` | `release` | No by default | Only approved release-blocking fix |
+| Local worktree | `main` | No | Direct push forbidden |
+
+## 5. Direct Push Policy
+
+Direct push is forbidden on:
+
+- `main`
+- `release`
+
+Direct push to `develop` should also be avoided for non-trivial work.
+
+Preferred approach:
+
+```text
+feature/* → merge request / pull request → develop
+develop → release
+release → merge request / pull request → main
+```
+
+Required:
+
+- Keep branch history reviewable.
+- Do not bypass release validation.
+- Do not push directly to `main`.
+- Do not commit feature work directly on `main`.
+- Do not use `release` as a normal development branch.
+- Do not create versioned `release/*` branches.
+
+## 6. Branch Naming Conventions
+
+### 6.1 Feature Branches
+
+Use:
+
+```text
+feature/<scope>
+```
+
+Recommended format:
+
+```text
+feature/<module-or-phase>-<short-description>
+```
+
+Examples:
+
+```text
+feature/auth-login-v1
+feature/api-refactor-v2
+feature/data-export-v1
+feature/ui-dashboard-redesign
+feature/model-training-pipeline-v0
+feature/hardware-control-smoke-test
+```
+
+### 6.2 Release Branch
+
+Use exactly:
+
+```text
+release
+```
+
+Forbidden release branch names:
+
+```text
+release/v1.0.0
+release/v0.5.0
+release/FaceConsole-v0.5.0
+release/<version>
+release/<version-or-phase>
+release/phase-2-integration
+```
+
+### 6.3 Hotfix Branches
+
+Use only when explicitly approved:
+
+```text
+hotfix/<issue>
+```
+
+Examples:
+
+```text
+hotfix/security-patch
+hotfix/main-build-failure
+hotfix/critical-runtime-crash
+```
+
+Hotfix flow should be decided case by case.
+
+Default rule:
+
+- Do not suggest `hotfix/*` unless the user explicitly asks for urgent baseline repair.
+
+## 7. Change Risk Policy
+
+When a change is risky, experimental, architecture-level, hardware-related, data-destructive, migration-related, or release-sensitive, it must start from `feature/*`.
+
+Examples of risky changes:
+
+1. Architecture refactor
+2. Database migration
+3. Hardware output or device control
+4. Authentication / authorization change
+5. Deployment pipeline change
+6. Model training pipeline change
+7. Data processing behavior change
+8. Public API behavior change
+9. State management redesign
+10. Safety-critical logic
+
+Required flow:
+
+```text
+feature/* → develop → release → main
+```
+
+## 8. Frozen / Baseline-Sensitive Module Policy
+
+If a project contains frozen modules, baseline documents, release notes, version locks, or accepted behavior definitions, do not modify them casually.
+
+Before modifying frozen or baseline-sensitive behavior:
+
+1. Explain why the change is required.
+2. Update the related freeze / baseline / release document if one exists.
+3. Bump the version if applicable.
+4. Run regression validation.
+5. Merge through: `feature/* → develop → release → main`
+
+Forbidden:
+
+1. Modify frozen behavior directly on `main`.
+2. Modify frozen behavior without documenting the reason.
+3. Modify frozen behavior on `release` unless it is a release-blocking fix.
+
+## 9. Validation Policy
+
+Before merging `feature/*` into `develop`, verify:
+
+- The feature scope is complete.
+- Local validation has passed.
+- Build / test / lint has passed if applicable.
+- Documentation is updated if behavior changed.
+- Known risks are documented.
+
+### 9.1 Commit Message Policy
+
+All commits, merge commits, and amended commits must follow these rules:
+
+- Use clear, purpose-driven messages in the repository's preferred language.
+- Do **not** add `Co-authored-by: Cursor <cursoragent@cursor.com>` or any Cursor-related attribution.
+- Do **not** add trailers, footers, or metadata that reference Cursor, `cursoragent`, or similar tooling.
+- If a local hook or editor injects Cursor attribution, remove it before push. Prefer hook-safe flows (for example `git commit-tree`) when normal `git commit` cannot produce a clean message.
+- Only create commits when the user explicitly requests it, unless completing an explicitly requested merge or release step.
+
+Before reporting a commit or merge as complete, verify:
+
+```bash
+git log -1 --format=full
+```
+
+contains no Cursor-related lines.
+
+Before merging `develop` into `release`, verify:
+
+- `develop` is in an acceptable integration state.
+- No incomplete feature work is included.
+- Release scope is clear.
+- Regression validation is planned.
+
+Before publishing from `release`, verify:
+
+- Release validation passed.
+- Version tag will be created on the published commit.
+
+Before merging `release` into `main`, verify:
+
+- The user gave an **explicit promotion instruction** for this release (hard gate).
+- Release validation passed.
+- No new feature expansion remains on release.
+- The published commit is tagged if a version was published.
+- Release notes or baseline notes exist if needed.
+- If any of the above is missing, **stop** and do not touch `main`.
+
+## 10. Agent Behavior Rules
+
+When generating Git-related instructions, the agent must:
+
+- Treat `main` as protected.
+- Avoid suggesting direct commits on `main`.
+- Avoid suggesting direct push to `main`.
+- Avoid suggesting `feature/* → main`.
+- Avoid suggesting `develop → main`.
+- Use `feature/*` for new work by default.
+- Use `develop` as the integration branch.
+- Use the fixed branch name `release` for pre-release validation.
+- Never create versioned branches such as `release/v0.5.0` or `release/FaceConsole-v0.5.0`.
+- Position versions with Git tags, not branch names.
+- Never promote `release` to `main` without an explicit user promotion instruction.
+- Mention validation requirements before merge promotion.
+- After one successful promotion, wait for a **new** explicit instruction before any later `release → main`.
+- Never add Cursor-related commit trailers; follow section **9.1 Commit Message Policy**.
+- Avoid introducing extra long-lived branch types.
+- Keep rules project-agnostic unless the user explicitly asks for project-specific adaptation.
+
+Preferred command pattern for new work:
+
+```bash
+git checkout develop
+git pull
+git checkout -b feature/<scope>
+```
+
+Forbidden command patterns by default:
+
+```bash
+git push origin main
+git commit -m "..."   # while on main
+git merge feature/... # while on main
+git merge develop     # while on main
+git checkout -b release/v0.5.0
+git checkout -b release/FaceConsole-v0.5.0
+```
+
+Release-candidate promotion pattern:
+
+```bash
+git checkout release
+git pull
+git merge --no-ff develop
+git push origin release
+```
+
+Publish / tag pattern:
+
+```bash
+# on release, after validation — annotated tag only, body must include why/features/fixes
+git tag -a <project-tag-or-vX.Y.Z> -F path/to/TAG_NOTES.md
+git push origin <project-tag-or-vX.Y.Z>
+```
+
+Controlled release promotion pattern:
+
+```bash
+git checkout main
+git pull
+# merge message must be user-facing release notes (product upgrades + fixes), not process notes
+git merge --no-ff release -F path/to/MAIN_RELEASE_NOTES.md
+git push origin main
+```
+
+Only use controlled release promotion when the user explicitly instructs promotion for this release. Never run it proactively.
+
+## 11. Default Decision Rules
+
+| Situation | Action |
+|-----------|--------|
+| New feature work | Use `feature/*` |
+| Experimental or architecture-level | Use `feature/*` |
+| Risky or critical behavior change | Use `feature/*` |
+| Integrating completed work | Merge `feature/*` into `develop` |
+| Preparing testable release candidate | Merge `develop` into `release` |
+| Publishing a version | Tag the published commit on `release` |
+| Promoting accepted stable baseline | Merge `release` into `main` **only** after explicit user promotion instruction |
+| Release finished / tagged but no promote command | Do not touch `main` |
+| Uncertain | Do not touch `main`; ask for confirmation |
+
+## 12. Minimal Summary
+
+The default branch flow is:
+
+```text
+feature/* → develop → release → main
+```
+
+Core rules:
+
+1. `main` is protected.
+2. `main` only accepts `release`.
+3. `release` is a fixed long-lived branch name; never create `release/<version>`.
+4. When `develop` is stable, merge `develop` into `release`.
+5. Version positioning uses Git tags, not release branch names.
+6. After acceptance **and** an explicit user promotion instruction, merge `release` into `main`.
+7. Release fixes on `release` must be back-merged into `develop`.
+8. `develop` accepts completed `feature/*`.
+9. `feature/*` is used for new, risky, experimental, or large-version work.
+10. Direct push to `main` is forbidden.
+11. `develop` must not merge directly into `main`.
+12. `feature/*` must not merge directly into `main`.

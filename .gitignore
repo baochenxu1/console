@@ -1,0 +1,78 @@
+# dependencies
+node_modules/
+examples/**/node_modules/
+
+# build outputs
+dist/
+dist-web/
+build/
+dist-smoke-mediapipe/
+dist-sdk/
+dist-sdk-package/
+examples/**/dist/
+*.tgz
+
+# Browser MediaPipe assets (scripts/prepare-browser-mediapipe-assets.mjs)
+public/models/*.task
+public/assets/mediapipe/wasm/
+public/assets/mediapipe/manifest.json
+
+# vite
+.vite/
+node_modules/.vite/
+vite.config.js.timestamp-*.mjs
+
+# python
+STServo_Python/stservo-env/
+STServo_Python/**/venv/
+tools/**/.venv/
+tools/**/venv/
+**/__pycache__/
+**/*.py[cod]
+**/*.egg-info/
+.pytest_cache/
+**/.pytest_cache/
+.eggs/
+*.egg
+tools/**/*.pyc
+tools/**/*.pyo
+tools/**/*.pyd
+
+# large binary models (download locally; see tools/tracking_service/models/README.md)
+tools/tracking_service/models/*.task
+
+# local env
+.env
+.env.*
+!.env.example
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+
+# tracking runtime artifacts (local config / uploads / recordings — not for git)
+RecordData/
+tools/tracking_service/config/
+tools/tracking_service/uploads/
+tools/tracking_service/datasets/
+gaze-tracking-diff.patch
+
+# logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+TODO.md
+
+# local scratch / daily dumps (not for repo)
+_daily_*.txt
+
+# Windows accidental device dump (NUL device → NUL.css)
+NUL.css
+nul.css

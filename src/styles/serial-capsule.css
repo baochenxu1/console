@@ -1,0 +1,257 @@
+/* 共享串口胶囊 — 追踪预览 / 绑定 / 表情 / 机构调试等页复用 */
+
+.serial-capsule-wrap {
+  position: relative;
+}
+
+.serial-capsule {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 148px;
+  height: 32px;
+  padding: 0 12px;
+  box-sizing: border-box;
+  border-radius: 999px;
+  border: 1px solid #fecaca;
+  background: #fef2f2;
+  font-size: 11px;
+  font-weight: 600;
+  color: #b91c1c;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s, color 0.15s;
+  white-space: nowrap;
+}
+
+.serial-capsule-label {
+  flex: 1 1 auto;
+  min-width: 0;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.serial-capsule:hover {
+  border-color: #fca5a5;
+}
+
+.serial-capsule--open {
+  box-shadow: 0 0 0 2px rgba(148, 163, 184, 0.25);
+}
+
+.serial-capsule--connected {
+  border-color: #bbf7d0;
+  background: #f0fdf4;
+  color: #15803d;
+}
+
+.serial-capsule--connected:hover {
+  border-color: #86efac;
+}
+
+.serial-capsule-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #ef4444;
+  flex-shrink: 0;
+}
+
+.serial-capsule--connected .serial-capsule-dot {
+  background: #22c55e;
+}
+
+.serial-capsule-popover {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: min(92vw, 360px);
+  z-index: 50;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  background: #fff;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.1);
+}
+
+.serial-compact-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.serial-compact-protocol {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.serial-compact-protocol-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #64748b;
+}
+
+.serial-compact-segment {
+  display: inline-flex;
+  padding: 2px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  background: #f8fafc;
+  gap: 2px;
+}
+
+.serial-compact-segment-btn {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 30px;
+  padding: 0 10px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background: transparent;
+  font-size: 11px;
+  font-weight: 600;
+  color: #94a3b8;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s, box-shadow 0.15s;
+}
+
+.serial-compact-segment-btn:hover:not(:disabled):not(.serial-compact-segment-btn--active) {
+  color: #475569;
+  background: #f1f5f9;
+}
+
+.serial-compact-segment-btn--active {
+  background: #0369a1;
+  border-color: #0284c7;
+  color: #fff;
+  box-shadow: 0 1px 2px rgba(3, 105, 161, 0.35);
+}
+
+.serial-compact-segment-btn--active-rj {
+  background: #7c3aed;
+  border-color: #8b5cf6;
+  color: #fff;
+  box-shadow: 0 1px 2px rgba(124, 58, 237, 0.35);
+}
+
+.serial-compact-segment-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.serial-compact-segment-btn--active:disabled,
+.serial-compact-segment-btn--active-rj:disabled {
+  opacity: 1;
+  cursor: not-allowed;
+}
+
+.serial-compact-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.serial-compact-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  width: 100%;
+}
+
+.serial-compact-baud {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: #64748b;
+}
+
+.serial-compact-baud input {
+  width: 80px;
+  height: 28px;
+  padding: 0 8px;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+  font-size: 11px;
+}
+
+.serial-compact-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 34px;
+  padding: 0 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  color: #475569;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s, box-shadow 0.15s;
+}
+
+.serial-compact-btn:hover:not(:disabled) {
+  filter: brightness(0.98);
+}
+
+.serial-compact-btn:disabled {
+  opacity: 0.42;
+  cursor: not-allowed;
+  filter: none;
+}
+
+.serial-compact-btn--primary {
+  border-color: #bae6fd;
+  background: #f0f9ff;
+  color: #0369a1;
+}
+
+.serial-compact-btn--open {
+  border-color: #86efac;
+  background: #ecfdf5;
+  color: #047857;
+  box-shadow: inset 0 0 0 1px rgba(16, 185, 129, 0.08);
+}
+
+.serial-compact-btn--open:hover:not(:disabled) {
+  border-color: #34d399;
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.serial-compact-btn--close {
+  border-color: #fca5a5;
+  background: #fef2f2;
+  color: #b91c1c;
+  box-shadow: inset 0 0 0 1px rgba(239, 68, 68, 0.06);
+}
+
+.serial-compact-btn--close:hover:not(:disabled) {
+  border-color: #f87171;
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.serial-compact-hint {
+  margin: 0;
+  font-size: 11px;
+  color: #b45309;
+}
+
+.serial-compact-hint--warn {
+  color: #b45309;
+}
+
+.serial-compact-err {
+  margin: 0;
+  font-size: 11px;
+  color: #dc2626;
+  word-break: break-word;
+}

@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "feetech-scservo"
+version = "0.1.1"
+description = "Feetech SC/ST bus servo protocol driver (pyserial). Safe window: center ±90°."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "Face Console" }]
+keywords = ["servo", "feetech", "scservo", "sms", "sts", "serial"]
+dependencies = ["pyserial>=3.5"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Topic :: System :: Hardware",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0", "build>=1.0"]
+
+[project.urls]
+Documentation = "https://github.com/LUVIA-me/LuviaMini-Console"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+feetech_scservo = ["py.typed"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
